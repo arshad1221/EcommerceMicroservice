@@ -19,37 +19,23 @@ public class OrderController {
 
 	@Autowired
 	public OrderService orderService;
-	
-	
+
 	@Autowired
 	public ProductService productService;
 
-
-	@PostMapping
-	public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest){
-
+	@PostMapping("/placeorde")
+	public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest) {
 
 		long orderId = orderService.placeorder(orderRequest);
 		productService.reducePoductQuantity(orderRequest.getProductid(), orderRequest.getQuantity());
 
-
-		return new  ResponseEntity<>(orderId,HttpStatus.CREATED);
-
+		return new ResponseEntity<>(orderId, HttpStatus.CREATED);
 
 	}
 
-	@GetMapping
+	@GetMapping("/test")
 	public String test() {
 
 		return "working Fine";
 	}
 }
-
-
-
-
-
-
-
-
-
